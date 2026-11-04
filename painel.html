@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#5b3df5" />
+    <meta name="robots" content="noindex" />
+    <title>Painel | LinksPages</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section id="configWarning" class="auth-screen" hidden>
+      <div class="auth-card">
+        <div class="brand-mark" aria-hidden="true">🔗</div>
+        <p class="eyebrow">LINKSPAGES</p>
+        <h1>Falta configurar o Supabase</h1>
+        <p>Abra o arquivo <strong>supabase-config.js</strong> e preencha a Project URL e a chave publishable do seu projeto. O passo a passo está no README.</p>
+        <a class="text-button" href="index.html">‹ Voltar para o início</a>
+      </div>
+    </section>
+
+    <section id="authScreen" class="auth-screen" hidden>
+      <form id="authForm" class="auth-card">
+        <div class="brand-mark" aria-hidden="true">🔗</div>
+        <p class="eyebrow">LINKSPAGES</p>
+        <h1 id="authTitle">Entre na sua conta</h1>
+        <p id="authDescription">Gerencie os links da sua página em qualquer aparelho.</p>
+        <label for="authEmail">E-mail</label>
+        <input id="authEmail" type="email" autocomplete="email" required placeholder="voce@email.com" />
+        <label for="authPassword">Senha</label>
+        <input id="authPassword" type="password" autocomplete="current-password" required minlength="6" placeholder="No mínimo 6 caracteres" />
+        <p id="authMessage" class="auth-message" aria-live="polite"></p>
+        <button id="authSubmit" class="primary-button auth-submit" type="submit">Entrar</button>
+        <button id="authToggle" class="text-button" type="button">Ainda não tenho conta</button>
+        <button id="forgotPassword" class="text-button subtle" type="button">Esqueci minha senha</button>
+        <a class="text-button subtle" href="index.html">‹ Voltar para o início</a>
+      </form>
+    </section>
+
+    <section id="recoveryScreen" class="auth-screen" hidden>
+      <form id="recoveryForm" class="auth-card">
+        <div class="brand-mark" aria-hidden="true">🔑</div>
+        <p class="eyebrow">LINKSPAGES</p>
+        <h1>Crie uma nova senha</h1>
+        <p>Escolha a nova senha da sua conta.</p>
+        <label for="newPassword">Nova senha</label>
+        <input id="newPassword" type="password" autocomplete="new-password" required minlength="6" placeholder="No mínimo 6 caracteres" />
+        <p id="recoveryMessage" class="auth-message" aria-live="polite"></p>
+        <button class="primary-button auth-submit" type="submit">Salvar nova senha</button>
+      </form>
+    </section>
+
+    <section id="onboardScreen" class="auth-screen" hidden>
+      <form id="onboardForm" class="auth-card">
+        <div class="brand-mark" aria-hidden="true">✨</div>
+        <p class="eyebrow">QUASE LÁ</p>
+        <h1>Escolha seu endereço</h1>
+        <p>É assim que as pessoas vão encontrar a sua página. Use letras minúsculas, números ou _ (de 3 a 30 caracteres).</p>
+        <label for="onboardUsername">Endereço</label>
+        <div class="username-field"><span>@</span><input id="onboardUsername" type="text" required minlength="3" maxlength="30" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="seunome" /></div>
+        <label for="onboardName">Nome de exibição <small>(opcional)</small></label>
+        <input id="onboardName" type="text" maxlength="60" placeholder="Seu nome ou marca" />
+        <p id="onboardMessage" class="auth-message" aria-live="polite"></p>
+        <button class="primary-button auth-submit" type="submit">Criar minha página</button>
+        <button id="onboardLogout" class="text-button subtle" type="button">Sair</button>
+      </form>
+    </section>
+
+    <main id="appShell" class="app-shell" hidden>
+      <header class="topbar">
+        <a class="brand" href="index.html"><span class="brand-mark small" aria-hidden="true">🔗</span> LinksPages</a>
+        <div class="account"><span id="userEmail"></span><button id="logoutButton" type="button">Sair</button></div>
+      </header>
+
+      <section class="share-bar">
+        <div>
+          <p class="eyebrow">SEU LINK PÚBLICO</p>
+          <a id="shareUrl" class="share-url" target="_blank" rel="noopener"></a>
+        </div>
+        <div class="share-actions">
+          <button id="copyShare" class="ghost-button" type="button">Copiar link</button>
+          <a id="openShare" class="primary-button as-link" target="_blank" rel="noopener">Abrir página ↗</a>
+        </div>
+      </section>
+
+      <div class="dash-grid">
+        <div class="dash-main">
+          <section class="card">
+            <div class="card-head"><h2>Seus links</h2><span id="linkCount" class="muted-count"></span></div>
+            <form id="addForm" class="add-form" novalidate>
+              <input id="addTitle" type="text" maxlength="80" placeholder="Título (ex.: Meu Instagram)" required aria-label="Título do link" />
+              <input id="addUrl" type="text" inputmode="url" autocapitalize="none" placeholder="instagram.com/seuperfil" required aria-label="Endereço do link" />
+              <button class="primary-button" type="submit">Adicionar</button>
+            </form>
+            <p id="addMessage" class="form-message" aria-live="polite"></p>
+            <ul id="linkList" class="manage-list"></ul>
+            <p id="linksEmpty" class="list-empty" hidden>Nenhum link ainda. Adicione o primeiro acima.</p>
+          </section>
+
+          <section class="card">
+            <div class="card-head"><h2>Perfil e aparência</h2></div>
+            <form id="profileForm" class="profile-form">
+              <label for="profName">Nome de exibição</label>
+              <input id="profName" type="text" maxlength="60" placeholder="Seu nome ou marca" />
+              <label for="profBio">Bio <small id="bioCounter">0/160</small></label>
+              <textarea id="profBio" rows="3" maxlength="160" placeholder="Uma frase sobre você"></textarea>
+              <label for="profAvatar">Foto de perfil <small>(endereço https da imagem, opcional)</small></label>
+              <input id="profAvatar" type="text" inputmode="url" autocapitalize="none" placeholder="https://…/foto.jpg" />
+              <span class="label-like">Tema</span>
+              <div id="themePicker" class="theme-picker" role="radiogroup" aria-label="Tema"></div>
+              <p id="profileMessage" class="form-message" aria-live="polite"></p>
+              <button class="primary-button" type="submit">Salvar perfil</button>
+            </form>
+          </section>
+        </div>
+
+        <aside class="dash-preview">
+          <p class="eyebrow">PRÉ-VISUALIZAÇÃO</p>
+          <div class="phone"><div id="preview"></div></div>
+        </aside>
+      </div>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="common.js"></script>
+    <script src="painel.js"></script>
+  </body>
+</html>

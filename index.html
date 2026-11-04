@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#5b3df5" />
+    <meta name="description" content="Reúna todas as suas redes sociais em um único link." />
+    <title>LinksPages | Todos os seus links em um só lugar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="landing">
+      <header class="topbar">
+        <a class="brand" href="index.html"><span class="brand-mark small" aria-hidden="true">🔗</span> LinksPages</a>
+        <a class="ghost-button as-link" href="painel.html">Entrar</a>
+      </header>
+
+      <main class="hero-landing">
+        <div class="hero-text">
+          <p class="eyebrow">UM LINK PARA TUDO</p>
+          <h1>Todas as suas redes em <em>uma página só.</em></h1>
+          <p class="hero-copy">Crie sua conta, cadastre os links do Instagram, YouTube, WhatsApp e do que mais quiser, e compartilhe um único endereço. Quem abrir vê seus links e vai direto para onde quiser.</p>
+          <div class="hero-actions">
+            <a class="primary-button as-link big" href="painel.html">Criar minha página</a>
+            <a class="ghost-button as-link big" href="#como-funciona">Como funciona</a>
+          </div>
+        </div>
+
+        <div class="phone hero-phone" aria-hidden="true">
+          <div class="profile-page" data-theme="escuro">
+            <div class="profile-avatar fallback">L</div>
+            <h2 class="profile-name">Leonardo</h2>
+            <p class="profile-handle">@leonardo</p>
+            <p class="profile-bio">Criador de conteúdo e desenvolvedor.</p>
+            <ul class="link-list">
+              <li><span class="link-button"><span class="link-icon" style="background:#e1306c">📸</span><span class="link-label">Meu Instagram</span><span class="link-arrow">›</span></span></li>
+              <li><span class="link-button"><span class="link-icon" style="background:#ff0033">▶️</span><span class="link-label">Canal no YouTube</span><span class="link-arrow">›</span></span></li>
+              <li><span class="link-button"><span class="link-icon" style="background:#1fa855">💬</span><span class="link-label">Fale comigo no WhatsApp</span><span class="link-arrow">›</span></span></li>
+              <li><span class="link-button"><span class="link-icon" style="background:#24292f">💻</span><span class="link-label">Meus projetos</span><span class="link-arrow">›</span></span></li>
+            </ul>
+          </div>
+        </div>
+      </main>
+
+      <section id="como-funciona" class="steps">
+        <article class="step"><span>1</span><h3>Cadastre-se</h3><p>Use seu e-mail e uma senha. Depois escolha o seu endereço, como <strong>@seunome</strong>.</p></article>
+        <article class="step"><span>2</span><h3>Adicione seus links</h3><p>Cole os endereços das suas redes, ordene, oculte e acompanhe quantos cliques cada um recebeu.</p></article>
+        <article class="step"><span>3</span><h3>Compartilhe</h3><p>Divulgue o link da sua página. Quem abrir clica no botão e é redirecionado para a rede escolhida.</p></article>
+      </section>
+
+      <section class="visit">
+        <h2>Procurando a página de alguém?</h2>
+        <form id="visitForm" class="visit-form">
+          <div class="username-field"><span>@</span><input id="visitUsername" type="text" required minlength="3" maxlength="30" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="endereço" aria-label="Endereço da página" /></div>
+          <button class="primary-button" type="submit">Abrir</button>
+        </form>
+      </section>
+
+      <footer class="landing-footer">LinksPages</footer>
+    </div>
+
+    <script>
+      document.getElementById("visitForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const username = document.getElementById("visitUsername").value.trim().replace(/^@/, "").toLowerCase();
+        if (username) window.location.href = `perfil.html?u=${encodeURIComponent(username)}`;
+      });
+    </script>
+  </body>
+</html>
